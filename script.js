@@ -136,20 +136,23 @@ checkoutBtn.addEventListener("click", function(){
 
     const isOpen = checkRestaurantOpen();
     if(!isOpen){
-        alert("RESTAURANTE FECHADO NO MOMENTO")
+        
+        alert("RESTAURANTE FECHADO NO MOMENTO");
+        return; 
     }
-
-
 
     if(cart.length === 0) return;
+
     if(addressInput.value === ""){
-    addressWarn.classList.remove("hidden")
-    addressInput.classList.add("border-red-500")
+        addressWarn.classList.remove("hidden");
+        addressInput.classList.add("border-red-500");
+        return; 
     }
 
+    
     const cartItems = cart.map((item) => {
-        return(
-            `${item.nome} Quantidade: (${item.quantity}) Preço: R$${item.price}`
+        return (
+            ` ${item.nome} Quantidade: (${item.quantity}) Preço: R$${item.price} |`
         )
     }).join("")
 
@@ -158,7 +161,8 @@ checkoutBtn.addEventListener("click", function(){
 
     window.open(`https://wa.me/${phone}?text=${message} Endereço: ${addressInput.value}`, "_blank")
 
-    cart.length = [];
+    
+    cart = []; 
     updateCartModal();
 })
 
